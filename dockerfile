@@ -1,17 +1,15 @@
 FROM node:latest
+EXPOSE 8080
 
-# creating app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir -p /home/LocalBuzz
+WORKDIR /home/LocalBuzz
+
+COPY ./Client /home/LocalBuzz
+
+RUN npm run build
 
 RUN npm install
 
-ADD Client /usr/src/app/Client
-ADD Server /usr/src/app/Server
-
-RUN npm build
-
-CMD ["npm","start"]
-
+CMD npm start
 
 
