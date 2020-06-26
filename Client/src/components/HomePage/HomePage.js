@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 
 import '../HomePage/HomePage.css';
-import Banner from '../HomePage/Banner';
-import About from '../HomePage/About';
-import Tag from '../HomePage/Tag';
 import Footer from '../Footer/Footer';
+import Spinner from 'react-bootstrap/Spinner';
+const About = React.lazy(() => import('../HomePage/About'));
+const Tag = React.lazy(() => import('../HomePage/Tag'));
+const Banner = React.lazy(() => import('../HomePage/Banner'));
 
 class HomePage extends Component {
   state = {
@@ -24,34 +25,45 @@ class HomePage extends Component {
   render() {
     return (
       <section className="HomePage">
-        <Banner forumPageRedirect={this.forumPageRedirect} />
+        <Suspense fallback={<Spinner animation="border" variant="info" />}>
+          <Banner forumPageRedirect={this.forumPageRedirect} />
+        </Suspense>
+
         <section className="aboutSection">
           <section className="HomePageAbout">
-            <About />
+            <Suspense fallback={<Spinner animation="border" variant="info" />}>
+              <About />
+            </Suspense>
           </section>
 
           <section className="HomePageTags">
-            <Tag
-              tagName={this.state.tagName1}
-              tagDescription={this.state.tagDescription1}
-              tagIcon={
-                'https://image.flaticon.com/icons/png/512/204/204245.png'
-              }
-            />
-            <Tag
-              tagName={this.state.tagName2}
-              tagDescription={this.state.tagDescription2}
-              tagIcon={
-                'https://www.shareicon.net/data/512x512/2016/06/30/788775_food_512x512.png'
-              }
-            />
-            <Tag
-              tagName={this.state.tagName3}
-              tagDescription={this.state.tagDescription3}
-              tagIcon={
-                'https://image.flaticon.com/icons/png/512/426/426375.png'
-              }
-            />
+            <Suspense fallback={<Spinner animation="border" variant="info" />}>
+              <Tag
+                tagName={this.state.tagName1}
+                tagDescription={this.state.tagDescription1}
+                tagIcon={
+                  'https://image.flaticon.com/icons/png/512/204/204245.png'
+                }
+              />
+            </Suspense>
+            <Suspense fallback={<Spinner animation="border" variant="info" />}>
+              <Tag
+                tagName={this.state.tagName2}
+                tagDescription={this.state.tagDescription2}
+                tagIcon={
+                  'https://www.shareicon.net/data/512x512/2016/06/30/788775_food_512x512.png'
+                }
+              />
+            </Suspense>
+            <Suspense fallback={<Spinner animation="border" variant="info" />}>
+              <Tag
+                tagName={this.state.tagName3}
+                tagDescription={this.state.tagDescription3}
+                tagIcon={
+                  'https://image.flaticon.com/icons/png/512/426/426375.png'
+                }
+              />
+            </Suspense>
           </section>
           <Footer />
         </section>

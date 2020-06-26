@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Button, Main } from 'grommet';
 import './HomePage.css';
 import { Link } from 'react-router-dom';
 import logo from '../Logo/localbuzzYellow.png';
-
+import Spinner from 'react-bootstrap/Spinner';
 
 function Banner({}) {
   return (
